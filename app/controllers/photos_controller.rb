@@ -11,6 +11,7 @@ class PhotosController < ApplicationController
     @the_photo = Photo.where({ :id => id }).at(0)
 
     render({ :template => "photos_templates/show" })
+
   end
 
   def delete
@@ -49,5 +50,21 @@ class PhotosController < ApplicationController
     update_photo.save
 
     redirect_to("/photos/#{id}")
+  end
+
+  def add_comment
+    input_photo_id = params.fetch("query_photo_id")
+    input_author_id = params.fetch("query_author_id")
+    input_comment = params.fetch("query_comment")
+
+    add_comment = Comment.new
+
+    add_comment.photo_id = input_photo_id
+    add_comment.author_id = input_author_id
+    add_comment.body = input_comment
+
+    add_comment.save    
+
+    redirect_to("/photos/#{input_photo_id}")
   end
 end
