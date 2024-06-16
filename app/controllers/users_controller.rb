@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     add_user.username = input_username
     add_user.save
 
-    redirect_to("/users")
+    redirect_to("/users/#{input_username}")
   end
 
   def update
