@@ -6,6 +6,10 @@ class PhotosController < ApplicationController
   end
 
   def show
+    parameter = params.fetch("path_id")
+
+    @the_photo = Photo.where({ :id => parameter }).at(0)
+
     render({ :template => "photos_templates/show" })
   end
 end
